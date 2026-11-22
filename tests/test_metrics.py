@@ -29,4 +29,11 @@ def test_metrics_scrape_not_counted():
     first = client.get("/metrics").get_data(as_text=True)
     second = client.get("/metrics").get_data(as_text=True)
 
-    assert first == second
+    def request_counters(metrics):
+        return sorted(
+            line
+            for line in metrics.splitlines()
+            if line.startswith("flask_http_requests_total{")
+        )
+
+    assert request_counters(first) == request_counters(second)
