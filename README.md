@@ -243,6 +243,31 @@ kubectl rollout status deployment/l00205530-flask
 
 The validated deployment had two available replicas, both running without restarts.
 
+### Automated Application Deployment
+
+The Flask application can be deployed using the version-controlled Kubernetes manifests and the automated deployment script.
+
+```bash
+./scripts/deploy-application.sh
+```
+
+The script performs six deployment stages:
+
+1. Verifies Kubernetes connectivity.
+2. Validates the Kubernetes manifests using server-side dry-run.
+3. Applies the Deployment and Service manifests.
+4. Waits for the Kubernetes rollout to complete.
+5. Verifies that the expected number of application replicas are ready.
+6. Displays the deployed resources and container image.
+
+The application image is pinned to a SHA256 digest in the Kubernetes Deployment manifest to ensure that the same container image is used across repeated deployments.
+
+The script supports repeated execution and exits with an error if manifest validation, deployment rollout, or replica verification fails.
+
+**Validation results:** The script was executed successfully against the local Kubernetes cluster. Both application replicas were available, with zero container restarts. Kubernetes reported the existing Deployment and Service resources as unchanged.
+
+This automation provides repeatable application deployment to an accessible Kubernetes cluster. Image publishing is handled separately by GitHub Actions, and deployment is not currently triggered automatically after each successful CI run.
+
 ## 10. Prometheus Monitoring
 
 Prometheus collects application metrics from the Flask pods.
