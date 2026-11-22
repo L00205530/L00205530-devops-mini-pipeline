@@ -66,3 +66,44 @@ extraScrapeConfigs: |
 
     metrics_path: /metrics
     scheme: http
+
+# L00205530 - Prometheus alerting rules
+serverFiles:
+  alerting_rules.yml:
+    groups:
+      - name: l00205530-flask-alerts
+        interval: 15s
+        rules:
+          - alert: FlaskReplicaAvailabilityLow
+            expr: |
+              (sum(up{job="l00205530-flask"}) or vector(0)) < 2
+            for: 2m
+            labels:
+              severity: warning
+              application: l00205530-flask
+            annotations:
+              summary: "Flask replica availability below expected level"
+              description: "Fewer than two Flask targets have been successfully scraped for two minutes."
+
+          - alert: FlaskHighHTTPErrorRate
+            expr: |
+              (
+                (
+                  sum(rate(flask_http_requests_total{job="l00205530-flask",status=~"5.."}[5m]))
+                  or vector(0)
+                )
+                /
+                clamp_min(
+                  sum(rate(flask_http_requests_total{job="l00205530-flask"}[5m])),
+                  0.001
+                )
+              ) > 0.05
+              and
+              sum(rate(flask_http_requests_total{job="l00205530-flask"}[5m])) > 0.1
+            for: 5m
+            labels:
+              severity: warning
+              application: l00205530-flask
+            annotations:
+              summary: "High Flask HTTP 5xx error rate"
+              description: "HTTP 5xx responses exceed 5 percent of requests during sustained traffic."
