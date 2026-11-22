@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: l00205530-flask
+  labels:
+    app: l00205530-flask
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: l00205530-flask
+  template:
+    metadata:
+      labels:
+        app: l00205530-flask
+    spec:
+      containers:
+        - name: flask
+          image: l00205530-devops-mini-pipeline:1.5
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 5000
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 5000
+            initialDelaySeconds: 3
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 5000
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 10001
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
