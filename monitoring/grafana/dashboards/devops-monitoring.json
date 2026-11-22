@@ -1,0 +1,132 @@
+{
+  "uid": "l00205530-devops",
+  "title": "L00205530 - DevOps Monitoring",
+  "tags": [
+    "devops",
+    "flask",
+    "kubernetes",
+    "l00205530"
+  ],
+  "timezone": "browser",
+  "schemaVersion": 39,
+  "version": 1,
+  "refresh": "15s",
+  "time": {
+    "from": "now-1h",
+    "to": "now"
+  },
+  "panels": [
+    {
+      "id": 1,
+      "title": "Available Flask Replicas",
+      "type": "stat",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "expr": "sum(up{job=\"l00205530-flask\"})",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "x": 0,
+        "y": 0,
+        "w": 6,
+        "h": 8
+      },
+      "options": {}
+    },
+    {
+      "id": 2,
+      "title": "HTTP Requests per Second",
+      "type": "timeseries",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "expr": "sum(rate(flask_http_requests_total[5m]))",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "reqps"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "x": 6,
+        "y": 0,
+        "w": 18,
+        "h": 8
+      },
+      "options": {}
+    },
+    {
+      "id": 3,
+      "title": "HTTP 5xx Error Rate",
+      "type": "timeseries",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "expr": "(100 * sum(rate(flask_http_requests_total{status=~\"5..\"}[5m])) / clamp_min(sum(rate(flask_http_requests_total[5m])), 0.001)) or vector(0)",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "x": 0,
+        "y": 8,
+        "w": 12,
+        "h": 8
+      },
+      "options": {}
+    },
+    {
+      "id": 4,
+      "title": "P95 HTTP Response Latency",
+      "type": "timeseries",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "expr": "histogram_quantile(0.95, sum by (le) (rate(flask_http_request_duration_seconds_bucket[5m])))",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "x": 12,
+        "y": 8,
+        "w": 12,
+        "h": 8
+      },
+      "options": {}
+    }
+  ]
+}
