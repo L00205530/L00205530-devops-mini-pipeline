@@ -1,0 +1,51 @@
+LAST SEEN   TYPE      REASON              OBJECT                                  MESSAGE
+38m         Normal    Scheduled           pod/l00205530-flask-cd446f556-m96xs     Successfully assigned default/l00205530-flask-cd446f556-m96xs to desktop-worker
+38m         Normal    ScalingReplicaSet   deployment/l00205530-flask              Scaled up replica set l00205530-flask-cd446f556 from 0 to 1
+38m         Normal    SuccessfulCreate    replicaset/l00205530-flask-cd446f556    Created pod: l00205530-flask-cd446f556-m96xs
+38m         Normal    Pulling             pod/l00205530-flask-cd446f556-m96xs     Pulling image "ghcr.io/l00205530/l00205530-devops-mini-pipeline:latest"
+38m         Normal    Started             pod/l00205530-flask-cd446f556-m96xs     Container started
+38m         Normal    Created             pod/l00205530-flask-cd446f556-m96xs     Container created
+38m         Normal    Pulled              pod/l00205530-flask-cd446f556-m96xs     Successfully pulled image "ghcr.io/l00205530/l00205530-devops-mini-pipeline:latest" in 2.491s (2.491s including waiting). Image size: 55766844 bytes.
+38m         Normal    SuccessfulCreate    replicaset/l00205530-flask-cd446f556    Created pod: l00205530-flask-cd446f556-jcqhz
+38m         Normal    Killing             pod/l00205530-flask-6f8d477b8c-9zkk2    Stopping container flask
+38m         Normal    Pulling             pod/l00205530-flask-cd446f556-jcqhz     Pulling image "ghcr.io/l00205530/l00205530-devops-mini-pipeline:latest"
+38m         Normal    ScalingReplicaSet   deployment/l00205530-flask              Scaled up replica set l00205530-flask-cd446f556 from 1 to 2
+38m         Normal    ScalingReplicaSet   deployment/l00205530-flask              Scaled down replica set l00205530-flask-6f8d477b8c from 2 to 1
+38m         Normal    Scheduled           pod/l00205530-flask-cd446f556-jcqhz     Successfully assigned default/l00205530-flask-cd446f556-jcqhz to desktop-worker
+38m         Normal    SuccessfulDelete    replicaset/l00205530-flask-6f8d477b8c   Deleted pod: l00205530-flask-6f8d477b8c-9zkk2
+38m         Normal    Created             pod/l00205530-flask-cd446f556-jcqhz     Container created
+38m         Normal    Pulled              pod/l00205530-flask-cd446f556-jcqhz     Successfully pulled image "ghcr.io/l00205530/l00205530-devops-mini-pipeline:latest" in 649ms (649ms including waiting). Image size: 55766844 bytes.
+38m         Normal    Started             pod/l00205530-flask-cd446f556-jcqhz     Container started
+38m         Normal    Killing             pod/l00205530-flask-6f8d477b8c-rcsqn    Stopping container flask
+38m         Normal    SuccessfulDelete    replicaset/l00205530-flask-6f8d477b8c   Deleted pod: l00205530-flask-6f8d477b8c-rcsqn
+38m         Normal    ScalingReplicaSet   deployment/l00205530-flask              Scaled down replica set l00205530-flask-6f8d477b8c from 1 to 0
+16m         Normal    Scheduled           pod/l00205530-flask-5b48b6d54d-djcfh    Successfully assigned default/l00205530-flask-5b48b6d54d-djcfh to desktop-worker
+16m         Normal    ScalingReplicaSet   deployment/l00205530-flask              Scaled up replica set l00205530-flask-5b48b6d54d from 0 to 1
+16m         Normal    SuccessfulCreate    replicaset/l00205530-flask-5b48b6d54d   Created pod: l00205530-flask-5b48b6d54d-djcfh
+16m         Normal    Pulling             pod/l00205530-flask-5b48b6d54d-djcfh    Pulling image "ghcr.io/l00205530/l00205530-devops-mini-pipeline@sha256:892c6a96183d1d09e2514c3d90d6a75464af58c00fbca6c2bd2a9f55659030ec"
+16m         Normal    Created             pod/l00205530-flask-5b48b6d54d-djcfh    Container created
+16m         Normal    Pulled              pod/l00205530-flask-5b48b6d54d-djcfh    Successfully pulled image "ghcr.io/l00205530/l00205530-devops-mini-pipeline@sha256:892c6a96183d1d09e2514c3d90d6a75464af58c00fbca6c2bd2a9f55659030ec" in 2.532s (2.532s including waiting). Image size: 55766888 bytes.
+16m         Normal    Started             pod/l00205530-flask-5b48b6d54d-djcfh    Container started
+16m         Normal    SuccessfulDelete    replicaset/l00205530-flask-cd446f556    Deleted pod: l00205530-flask-cd446f556-jcqhz
+16m         Normal    Scheduled           pod/l00205530-flask-5b48b6d54d-2g8d4    Successfully assigned default/l00205530-flask-5b48b6d54d-2g8d4 to desktop-worker
+16m         Warning   Unhealthy           pod/l00205530-flask-cd446f556-jcqhz     Readiness probe failed: Get "http://10.244.1.6:5000/health": dial tcp 10.244.1.6:5000: connect: connection refused
+16m         Normal    ScalingReplicaSet   deployment/l00205530-flask              Scaled down replica set l00205530-flask-cd446f556 from 2 to 1
+16m         Normal    SuccessfulCreate    replicaset/l00205530-flask-5b48b6d54d   Created pod: l00205530-flask-5b48b6d54d-2g8d4
+16m         Normal    Killing             pod/l00205530-flask-cd446f556-jcqhz     Stopping container flask
+16m         Normal    ScalingReplicaSet   deployment/l00205530-flask              Scaled up replica set l00205530-flask-5b48b6d54d from 1 to 2
+16m         Normal    Pulled              pod/l00205530-flask-5b48b6d54d-2g8d4    Container image "ghcr.io/l00205530/l00205530-devops-mini-pipeline@sha256:892c6a96183d1d09e2514c3d90d6a75464af58c00fbca6c2bd2a9f55659030ec" already present on machine and can be accessed by the pod
+16m         Normal    Created             pod/l00205530-flask-5b48b6d54d-2g8d4    Container created
+16m         Normal    Started             pod/l00205530-flask-5b48b6d54d-2g8d4    Container started
+16m         Normal    Killing             pod/l00205530-flask-cd446f556-m96xs     Stopping container flask
+16m         Normal    ScalingReplicaSet   deployment/l00205530-flask              Scaled down replica set l00205530-flask-cd446f556 from 1 to 0
+16m         Normal    SuccessfulDelete    replicaset/l00205530-flask-cd446f556    Deleted pod: l00205530-flask-cd446f556-m96xs
+2m50s       Normal    SuccessfulCreate    replicaset/l00205530-flask-6c7d4586cd   Created pod: l00205530-flask-6c7d4586cd-qn5k4
+2m50s       Normal    ScalingReplicaSet   deployment/l00205530-flask              Scaled up replica set l00205530-flask-6c7d4586cd from 0 to 1
+2m50s       Normal    Scheduled           pod/l00205530-flask-6c7d4586cd-qn5k4    Successfully assigned default/l00205530-flask-6c7d4586cd-qn5k4 to desktop-worker
+2m35s       Normal    Pulling             pod/l00205530-flask-6c7d4586cd-qn5k4    Pulling image "ghcr.io/l00205530/l00205530-devops-mini-pipeline:invalid-rollback-test"
+2m34s       Warning   Failed              pod/l00205530-flask-6c7d4586cd-qn5k4    Error: ErrImagePull
+2m34s       Warning   Failed              pod/l00205530-flask-6c7d4586cd-qn5k4    Failed to pull image "ghcr.io/l00205530/l00205530-devops-mini-pipeline:invalid-rollback-test": rpc error: code = NotFound desc = failed to pull and unpack image "ghcr.io/l00205530/l00205530-devops-mini-pipeline:invalid-rollback-test": failed to resolve reference "ghcr.io/l00205530/l00205530-devops-mini-pipeline:invalid-rollback-test": ghcr.io/l00205530/l00205530-devops-mini-pipeline:invalid-rollback-test: not found
+2m20s       Normal    BackOff             pod/l00205530-flask-6c7d4586cd-qn5k4    Back-off pulling image "ghcr.io/l00205530/l00205530-devops-mini-pipeline:invalid-rollback-test"
+2m20s       Warning   Failed              pod/l00205530-flask-6c7d4586cd-qn5k4    Error: ImagePullBackOff
+2m9s        Normal    SuccessfulDelete    replicaset/l00205530-flask-6c7d4586cd   Deleted pod: l00205530-flask-6c7d4586cd-qn5k4
+2m9s        Normal    ScalingReplicaSet   deployment/l00205530-flask              Scaled down replica set l00205530-flask-6c7d4586cd from 1 to 0
