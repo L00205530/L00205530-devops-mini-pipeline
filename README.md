@@ -318,6 +318,43 @@ up{job="l00205530-flask"}
 
 A healthy deployment should report both Flask replicas with a value of `1`.
 
+### Prometheus Alerting
+
+Prometheus evaluates application alert rules every 15 seconds.
+
+Two alert rules are configured:
+
+| Alert | Condition | Duration |
+|---|---|---|
+| FlaskReplicaAvailabilityLow | Fewer than two healthy Flask scrape targets | 2 minutes |
+| FlaskHighHTTPErrorRate | HTTP 5xx error rate above 5% under sustained traffic | 5 minutes |
+
+The availability alert was validated by temporarily reducing the Kubernetes deployment from two replicas to one.
+
+Prometheus detected the reduction, transitioned the alert through PENDING to FIRING, and returned to INACTIVE after the deployment was restored.
+
+The HTTP 5xx alert was successfully loaded into Prometheus but has not been trigger-tested.
+
+Alertmanager is disabled; alerts are visible in Prometheus but do not generate external notifications.
+
+For the implementation and testing details, see [Monitoring Documentation](docs/monitoring.md).
+
+### Kubernetes Application Logging
+
+The application produces HTTP access logs through Gunicorn. Kubernetes provides access to logs from both Flask replicas.
+
+```bash
+kubectl logs deployment/l00205530-flask \
+  --all-pods=true \
+  --all-containers=true \
+  --tail=20 \
+  --prefix=true
+```
+
+Logging was verified for Kubernetes health probes and Prometheus metrics requests, including timestamps, pod identifiers, request paths, and HTTP response codes.
+
+Centralized log aggregation is not implemented in this academic environment.
+
 ## 11. Grafana Monitoring Dashboard
 
 Grafana provides a visual monitoring interface connected to Prometheus.
