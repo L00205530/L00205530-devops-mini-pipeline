@@ -82,7 +82,7 @@
       },
       "targets": [
         {
-          "expr": "100 * sum(rate(flask_http_requests_total{status=~\"5..\"}[5m])) / clamp_min(sum(rate(flask_http_requests_total[5m])), 0.001)",
+          "expr": "(100 * sum(rate(flask_http_requests_total{status=~\"5..\"}[5m])) / clamp_min(sum(rate(flask_http_requests_total[5m])), 0.001)) or vector(0)",
           "refId": "A"
         }
       ],
