@@ -32,3 +32,20 @@ datasources:
         url: http://prometheus-server.monitoring.svc.cluster.local
         isDefault: true
         editable: false
+
+# Provision dashboards from a Kubernetes ConfigMap.
+dashboardProviders:
+  dashboardproviders.yaml:
+    apiVersion: 1
+    providers:
+      - name: 'L00205530 Dashboards'
+        orgId: 1
+        folder: 'DevOps Monitoring'
+        type: file
+        disableDeletion: true
+        editable: false
+        options:
+          path: /var/lib/grafana/dashboards/l00205530
+
+dashboardsConfigMaps:
+  l00205530: l00205530-grafana-dashboards
