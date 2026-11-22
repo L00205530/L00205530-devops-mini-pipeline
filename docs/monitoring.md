@@ -120,6 +120,75 @@ A healthy deployment with two replicas should return two series with value `1`.
 - HTTP 5xx panel: verified displaying zero when no error series exists.
 - Automated monitoring deployment: completed successfully.
 
+## Prometheus Alerting and Kubernetes Logging
+
+### Alerting Implementation
+
+Prometheus alert rules are defined declaratively in `monitoring/prometheus/values.yaml` and deployed through the existing Helm-based monitoring automation.
+
+Two alert rules are configured:
+
+| Alert | Trigger | Duration |
+|---|---|---|
+| FlaskReplicaAvailabilityLow | Fewer than two successfully scraped Flask replicas | 2 minutes |
+| FlaskHighHTTPErrorRate | HTTP 5xx error rate above 5%, with sufficient traffic | 5 minutes |
+
+Prometheus evaluates these rules every 15 seconds.
+
+### Availability Alert Validation
+
+The availability alert was tested by temporarily scaling the Flask Kubernetes Deployment from two replicas to one.
+
+The following command was used:
+
+```bash
+kubectl scale deployment/l00205530-flask --replicas=1
+```
+
+Prometheus detected the reduction in available targets and transitioned the availability alert from INACTIVE to PENDING.
+
+After the configured two-minute duration, the alert transitioned to FIRING.
+
+The original deployment configuration was restored using:
+
+```bash
+kubectl scale deployment/l00205530-flask --replicas=2
+kubectl rollout status deployment/l00205530-flask
+./scripts/deploy-application.sh
+```
+
+Following recovery, Prometheus returned the alert to INACTIVE.
+
+This demonstrates that the monitoring configuration detects reduced application availability and recognizes recovery.
+
+The HTTP 5xx alert was configured and loaded successfully, but a simulated high-error-rate test has not yet been performed.
+
+### Application Logging
+
+The Flask application produces HTTP access logs through its Gunicorn server.
+
+Application logs are available through Kubernetes:
+
+```bash
+kubectl logs deployment/l00205530-flask \
+  --all-pods=true \
+  --all-containers=true \
+  --tail=20 \
+  --prefix=true
+```
+
+The logs contain timestamps, pod identifiers, HTTP request methods, request paths, and response status codes.
+
+Logging was verified for Kubernetes `/health` probes and Prometheus `/metrics` requests, both returning HTTP 200 responses.
+
+### Limitations
+
+Alertmanager is disabled in this local monitoring environment. Prometheus evaluates and displays alerts, but external notifications are not configured.
+
+Application logging is available through Kubernetes but is not forwarded to a centralized logging platform.
+
+Prometheus and Grafana persistence are disabled, so monitoring history may be lost if their storage is recreated.
+
 ## Conclusion
 
 The implementation demonstrates application instrumentation, Kubernetes-based service discovery, centralized metrics collection, dashboard provisioning as code, and reproducible infrastructure deployment using Helm.
