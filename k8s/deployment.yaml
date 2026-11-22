@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: flask
-          image: ghcr.io/l00205530/l00205530-devops-mini-pipeline@sha256:892c6a96183d1d09e2514c3d90d6a75464af58c00fbca6c2bd2a9f55659030ec
+          image: ghcr.io/l00205530/l00205530-devops-mini-pipeline@sha256:08fccb61e0ddded4a4282a0f83d6c6342d7ff32d281f495e4eb30dc658ec9a28
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 5000
