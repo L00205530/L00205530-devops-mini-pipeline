@@ -16,8 +16,8 @@ spec:
     spec:
       containers:
         - name: flask
-          image: l00205530-devops-mini-pipeline:1.5
-          imagePullPolicy: Never
+          image: ghcr.io/l00205530/l00205530-devops-mini-pipeline:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 5000
           readinessProbe:
