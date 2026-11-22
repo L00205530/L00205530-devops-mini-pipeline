@@ -1,0 +1,2 @@
+NAME              READY   UP-TO-DATE   AVAILABLE   AGE   CONTAINERS   IMAGES                                                    SELECTOR
+l00205530-flask   2/2     2            2           19h   flask        ghcr.io/l00205530/l00205530-devops-mini-pipeline:latest   app=l00205530-flask

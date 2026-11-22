@@ -1,0 +1,2 @@
+NAME                      TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)   AGE
+l00205530-flask-service   ClusterIP   10.96.245.90   <none>        80/TCP    19h

@@ -1,0 +1,8 @@
+l00205530-flask-cd446f556-jcqhz
+Image: ghcr.io/l00205530/l00205530-devops-mini-pipeline:latest
+Image ID: ghcr.io/l00205530/l00205530-devops-mini-pipeline@sha256:f22dc1aa2668a1ffe3b0d180c3b617b6cd2308ac637cc191dc5525bfaf5c4c31
+
+l00205530-flask-cd446f556-m96xs
+Image: ghcr.io/l00205530/l00205530-devops-mini-pipeline:latest
+Image ID: ghcr.io/l00205530/l00205530-devops-mini-pipeline@sha256:f22dc1aa2668a1ffe3b0d180c3b617b6cd2308ac637cc191dc5525bfaf5c4c31
+
